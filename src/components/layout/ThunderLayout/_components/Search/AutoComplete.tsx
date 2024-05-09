@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { getSearchProducts } from '@/api/Product/getSearchProducts';
 import { Text } from '@/components/common';
 import { useOutSideClick } from '@/hooks';
 
@@ -9,7 +10,24 @@ type AutoCompleteProps = {
 };
 
 const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
-  const keyWords: string[] = [];
+  const [keyWords, setKeywords] = useState<string[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      if (!query) {
+        setKeywords([]);
+        return;
+      }
+      const { data } = await getSearchProducts({
+        query,
+        fromPage: 0,
+        toPage: 2,
+      });
+
+      setKeywords(data.map((data) => data.title));
+    })();
+  }, [query]);
+
   const closeRef = useRef(null);
 
   useOutSideClick(closeRef, onClose);
@@ -18,14 +36,14 @@ const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
     <div className="flex h-full flex-col" ref={closeRef}>
       <div className="flex-1 overflow-hidden p-2">
         <div className="mb-2 flex items-center border-b border-gray-300 pb-1">
-          <span className="material-symbols-outlined">storefront</span>
-          <Text size="sm" className="ml-1">
+          <span className="material-symbols-outlined shrink-0">storefront</span>
+          <Text size="sm" className="ml-1 shrink-0">
             상점 검색 {'>'}
           </Text>
-          <Text size="sm" color="red" className="mx-1">
+          <Text size="sm" color="red" className="mx-1 truncate">
             {query}
           </Text>
-          <Text size="sm" color="gray">
+          <Text size="sm" color="gray" className="shrink-0">
             상점명으로 검색
           </Text>
         </div>
@@ -38,7 +56,7 @@ const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
         ) : (
           <div className="h-full overflow-scroll pb-8">
             {keyWords.map((recent, idx) => (
-              <Text size="sm" key={idx} className="my-1 block">
+              <Text size="sm" key={idx} className="my-1 shrink-0 truncate">
                 {recent}
               </Text>
             ))}

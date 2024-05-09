@@ -1,17 +1,23 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Text } from '@/components/common';
 import { useOutSideClick } from '@/hooks';
+import { clearRecentKeywords, getRecentKeyWords } from '@/utils/localstorage';
 
 type RecentProps = {
   onClose: () => void;
 };
 
 const Recent = ({ onClose }: RecentProps) => {
-  const recents: string[] = [];
+  const [recents, setRecents] = useState([]);
+
+  useEffect(() => {
+    const recents = getRecentKeyWords();
+
+    setRecents(recents);
+  }, []);
 
   const closeRef = useRef(null);
-
   useOutSideClick(closeRef, onClose);
 
   return (
@@ -31,7 +37,7 @@ const Recent = ({ onClose }: RecentProps) => {
         ) : (
           <div className="h-full overflow-scroll pb-8">
             {recents.map((recent, idx) => (
-              <Text size="sm" key={idx} className="my-1 block">
+              <Text size="sm" key={idx} className="my-1 block truncate">
                 {recent}
               </Text>
             ))}
@@ -39,7 +45,13 @@ const Recent = ({ onClose }: RecentProps) => {
         )}
       </div>
       <div className="flex h-8 items-center justify-between bg-gray-100 px-2">
-        <Text size="sm"> 검색어 전체삭제 </Text>
+        <Text
+          size="sm"
+          className="cursor-pointer"
+          onClick={clearRecentKeywords}
+        >
+          검색어 전체삭제
+        </Text>
         <Text size="sm" onClick={onClose} className="cursor-pointer">
           닫기
         </Text>
