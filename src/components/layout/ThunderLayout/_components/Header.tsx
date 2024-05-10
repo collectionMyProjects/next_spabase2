@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import Search from './Search';
 
@@ -8,7 +7,6 @@ import Container from '@/components/layout/Container';
 import Wrapper from '@/components/layout/Wrapper';
 
 export default function Header() {
-  const router = useRouter();
   return (
     <div className="sticky top-0 z-10 border-b bg-white">
       <Wrapper>
