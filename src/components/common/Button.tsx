@@ -1,5 +1,7 @@
 import { cva } from 'class-variance-authority';
 
+import Spinner from './Spinner';
+
 import { cn } from '@/utils/style';
 
 type ButtonProps = {
@@ -103,8 +105,13 @@ const Button = ({
     >
       {isLoading ? (
         <>
-          <div className="absolute left-0 top-0 flex size-full items-center justify-center">
-            스피너 돌아가는 중
+          <div
+            className={cn(
+              'absolute left-0 top-0 flex size-full items-center justify-center',
+              ButtonVariants({ size }),
+            )}
+          >
+            <Spinner size="md" />
           </div>
         </>
       ) : (
