@@ -23,6 +23,9 @@ type ButtonProps = {
    * 버튼의 넓이가 100%인 경우 사용합니다.
    */
   fullWidth?: boolean;
+  /**
+   * 버튼의 자식요소 이름
+   */
   children?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'button'>;
 
@@ -51,22 +54,22 @@ const ButtonVariants = cva('relative disabled:opacity-50', {
     {
       outline: true,
       color: 'black',
-      className: 'border border-black text-black',
+      className: 'border border-black',
     },
     {
       outline: true,
       color: 'gray',
-      className: 'border border-slate-300 text-black',
+      className: 'border border-slate-300',
     },
     {
       outline: true,
       color: 'orange',
-      className: 'border border-orange-500 text-black',
+      className: 'border border-orange-500',
     },
     {
       outline: true,
       color: 'red',
-      className: 'border border-red-700 text-black',
+      className: 'border border-red-700',
     },
     { outline: false, color: 'black', className: 'bg-black' },
     { outline: false, color: 'gray', className: 'bg-slate-300' },
@@ -81,9 +84,9 @@ const ButtonVariants = cva('relative disabled:opacity-50', {
 });
 
 const Button = ({
-  size = 'md',
-  color = 'black',
-  outline = false,
+  size,
+  color,
+  outline,
   isLoading,
   fullWidth,
   children,
@@ -98,7 +101,15 @@ const Button = ({
         props.className,
       )}
     >
-      {children}
+      {isLoading ? (
+        <>
+          <div className="absolute left-0 top-0 flex size-full items-center justify-center">
+            스피너 돌아가는 중
+          </div>
+        </>
+      ) : (
+        children
+      )}
     </button>
   );
 };

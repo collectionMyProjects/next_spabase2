@@ -15,6 +15,9 @@ type TextProps = {
    * 텍스트 굵기 설정, 기본값 (normal)
    */
   weight?: 'light' | 'normal' | 'bold';
+  /**
+   * 텍스트의 자식요소 이름
+   */
   children?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'span'>;
 
