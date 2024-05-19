@@ -1,4 +1,5 @@
 import { cva } from 'class-variance-authority';
+import { forwardRef } from 'react';
 
 import { cn } from '@/utils/style';
 
@@ -25,12 +26,15 @@ const SpinnerVariants = cva(
   },
 );
 
-const Spinner = ({ size }: SpinnerProps) => {
+const Spinner = forwardRef(function Spinner(
+  { size }: SpinnerProps,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) {
   return (
     <div className="flex items-center justify-center">
       <span className={cn(SpinnerVariants({ size }))} />
     </div>
   );
-};
+});
 
 export default Spinner;

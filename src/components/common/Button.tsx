@@ -1,4 +1,5 @@
 import { cva } from 'class-variance-authority';
+import { forwardRef } from 'react';
 
 import Spinner from './Spinner';
 
@@ -85,19 +86,23 @@ const ButtonVariants = cva('relative disabled:opacity-50', {
   },
 });
 
-const Button = ({
-  size,
-  color,
-  outline,
-  isLoading,
-  fullWidth,
-  children,
-  ...props
-}: ButtonProps) => {
+const Button = forwardRef(function Button(
+  {
+    size,
+    color,
+    outline,
+    isLoading,
+    fullWidth,
+    children,
+    ...props
+  }: ButtonProps,
+  ref: React.ForwardedRef<HTMLButtonElement>,
+) {
   return (
     <button
       disabled={isLoading || props.disabled}
       {...props}
+      ref={ref}
       className={cn(
         ButtonVariants({ size, fullWidth, outline, color }),
         props.className,
@@ -119,6 +124,6 @@ const Button = ({
       )}
     </button>
   );
-};
+});
 
 export default Button;
