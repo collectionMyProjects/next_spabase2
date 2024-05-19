@@ -1,4 +1,5 @@
 import { cva } from 'class-variance-authority';
+import { forwardRef } from 'react';
 
 import { cn } from '@/utils/style';
 
@@ -56,7 +57,10 @@ const TextVariants = cva('', {
  * 일반적인 텍스트를 설명하기 위한 컴포넌트
  */
 
-const Text = ({ size, color, weight, children, ...props }: TextProps) => {
+const Text = forwardRef(function Text(
+  { size, color, weight, children, ...props }: TextProps,
+  ref: React.ForwardedRef<HTMLSpanElement>,
+) {
   return (
     <span
       className={cn(TextVariants({ size, color, weight }), props.className)}
@@ -65,6 +69,6 @@ const Text = ({ size, color, weight, children, ...props }: TextProps) => {
       {children}
     </span>
   );
-};
+});
 
 export default Text;
