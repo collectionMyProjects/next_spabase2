@@ -24,7 +24,7 @@ export const DefaultProduct: Story = {
     title: '샘플 제품',
     price: 50_000,
     createdAt: '2022-02-02',
-    imageUrl: faker.image.dataUri(),
+    imageUrl: faker.image.urlPicsumPhotos(),
   },
 };
 
@@ -33,7 +33,7 @@ export const SoldoutProduct: Story = {
     title: '샘플 제품',
     price: 50_000,
     createdAt: '2021-01-01',
-    imageUrl: faker.image.dataUri(),
+    imageUrl: faker.image.urlPicsumPhotos(),
     isSoldOut: true,
   },
 };
