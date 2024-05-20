@@ -63,6 +63,7 @@ const Text = forwardRef(function Text(
 ) {
   return (
     <span
+      ref={ref}
       className={cn(TextVariants({ size, color, weight }), props.className)}
       {...props}
     >

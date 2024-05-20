@@ -31,7 +31,7 @@ const Spinner = forwardRef(function Spinner(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    <div className="flex items-center justify-center">
+    <div ref={ref} className="flex items-center justify-center">
       <span className={cn(SpinnerVariants({ size }))} />
     </div>
   );

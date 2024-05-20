@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.4.0",
+    "@faker-js/faker": "^8.4.1",
     "@storybook/addon-essentials": "^8.1.1",
     "@storybook/addon-interactions": "^8.1.1",
     "@storybook/addon-links": "^8.1.1",
@@ -37,6 +38,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
+    "dayjs": "^1.11.11",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
