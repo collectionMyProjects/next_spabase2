@@ -1,4 +1,5 @@
-import Text from '@/components/common/Text';
+import Login from './Login';
+
 import Container from '@/components/layout/Container';
 import Wrapper from '@/components/layout/Wrapper';
 
@@ -8,9 +9,7 @@ const UserInfo = () => {
       <aside className="border-b border-slate-300">
         <Container>
           <div className="flex justify-end py-1">
-            <Text size="sm" color="gray">
-              로그인 / 회원가입
-            </Text>
+            <Login />
           </div>
         </Container>
       </aside>
