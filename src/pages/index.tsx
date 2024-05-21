@@ -1,12 +1,10 @@
-import Text from '@/components/common/Text';
+import ThunderLayout from '@/components/layout/ThunderLayout';
 
 const Home = () => {
   return (
-    <div className="p-12">
-      <Text size="xl" color="red">
-        하이요
-      </Text>
-    </div>
+    <ThunderLayout>
+      <div className="bg-slate-300" style={{ height: '150vh' }} />
+    </ThunderLayout>
   );
 };
 
