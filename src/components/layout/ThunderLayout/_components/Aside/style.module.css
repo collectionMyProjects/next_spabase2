@@ -1,0 +1,9 @@
+.aside {
+  right: 0;
+}
+
+@media (min-width: 1200px){
+  .aside {
+    right: -15px;
+  }
+}
