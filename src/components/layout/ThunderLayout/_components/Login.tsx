@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { disablePageScroll, enablePageScroll } from 'scroll-lock';
+import { disablePageScroll } from 'scroll-lock';
 
 import { Text } from '@/components/common';
 import LoginPannel from '@/components/shared/LoginPannel';
@@ -10,8 +10,6 @@ const Login = () => {
   useEffect(() => {
     if (showModal) {
       disablePageScroll();
-    } else {
-      enablePageScroll();
     }
   }, [showModal]);
 

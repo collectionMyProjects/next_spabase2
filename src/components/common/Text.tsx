@@ -17,6 +17,10 @@ type TextProps = {
    */
   weight?: 'light' | 'normal' | 'bold';
   /**
+   * 추가 스타일 요소
+   */
+  className?: string;
+  /**
    * 텍스트의 자식요소 이름
    */
   children?: React.ReactNode;
@@ -58,13 +62,13 @@ const TextVariants = cva('', {
  */
 
 const Text = forwardRef(function Text(
-  { size, color, weight, children, ...props }: TextProps,
+  { size, color, weight, children, className, ...props }: TextProps,
   ref: React.ForwardedRef<HTMLSpanElement>,
 ) {
   return (
     <span
       ref={ref}
-      className={cn(TextVariants({ size, color, weight }), props.className)}
+      className={cn(TextVariants({ size, color, weight }), className)}
       {...props}
     >
       {children}

@@ -1,3 +1,4 @@
+import Aside from './_components/Aside';
 import Footer from './_components/Footer';
 import Header from './_components/Header';
 import UserInfo from './_components/UserInfo';
@@ -11,6 +12,7 @@ const ThunderLayout = ({ children }: ThunderLayoutProps) => {
     <div className="min-w-[1000px]">
       <UserInfo />
       <Header />
+      <Aside />
       <main style={{ minHeight: 'calc(100vh - 28px - 108px - 65px )' }}>
         {children}
       </main>
