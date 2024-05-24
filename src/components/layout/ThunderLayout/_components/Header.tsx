@@ -14,25 +14,25 @@ export default function Header() {
               size="4xl"
               style={{ fontFamily: `'Black Han Sans', sans-serif;` }}
             >
-              🗃 중고장터
+              🗃 스포츠 클럽
             </Text>
             <Search />
             <div className="flex items-center gap-2">
-              <div className="flex items-center">
+              <div className="flex cursor-pointer items-center">
                 <span className="material-symbols-outlined">sell</span>
                 <Text weight="light" size="sm" className="mx-1">
                   판매하기
                 </Text>
               </div>
               |
-              <div className="flex items-center">
+              <div className="flex cursor-pointer items-center">
                 <span className="material-symbols-outlined">storefront</span>
                 <Text weight="light" size="sm" className="mx-1">
                   내 상점
                 </Text>
               </div>
               |
-              <div className="flex items-center">
+              <div className="flex cursor-pointer items-center">
                 <span className="material-symbols-outlined">chat_bubble</span>
                 <Text weight="light" size="sm" className="mx-1">
                   채팅
