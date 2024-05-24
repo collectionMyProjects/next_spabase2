@@ -13,7 +13,7 @@ export function getMockProductData(defaultValue?: Partial<Product>) {
     imageUrls:
       defaultValue?.imageUrls ??
       Array.from({ length: faker.number.int({ min: 1, max: 5 }) }).map(() =>
-        faker.image.dataUri(),
+        faker.image.urlPicsumPhotos(),
       ),
     isChange: defaultValue?.isChange ?? faker.datatype.boolean(),
     isUsed: defaultValue?.isUsed ?? faker.datatype.boolean(),

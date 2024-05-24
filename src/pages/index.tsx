@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
+import ProductList from './_components/ProductList';
 
+import Container from '@/components/layout/Container';
 import ThunderLayout from '@/components/layout/ThunderLayout';
-import { getProduct } from '@/repository/getProduct';
-import { Product } from '@/types';
+import Wrapper from '@/components/layout/Wrapper';
 
 const Home = () => {
-  const [product, setProduct] = useState<Product>();
-
-  useEffect(() => {
-    getProduct('id').then((res) => setProduct(res.data));
-  }, []);
-
   return (
     <ThunderLayout>
-      <div>Sample Product</div>
-      {product && <div>{JSON.stringify(product)}</div>}
+      <Wrapper>
+        <Container>
+          <ProductList />
+        </Container>
+      </Wrapper>
     </ThunderLayout>
   );
 };

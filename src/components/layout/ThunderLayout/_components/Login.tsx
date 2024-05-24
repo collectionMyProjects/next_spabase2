@@ -15,7 +15,12 @@ const Login = () => {
 
   return (
     <>
-      <Text size="sm" color="gray" onClick={() => setShowModal(true)}>
+      <Text
+        className="cursor-pointer"
+        size="sm"
+        color="gray"
+        onClick={() => setShowModal(true)}
+      >
         로그인 / 회원가입
       </Text>
       {showModal && (
