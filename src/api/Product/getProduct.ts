@@ -1,5 +1,5 @@
 import { Product } from '@/types';
-import { getMockProductData } from '@/utils/ProductMock';
+import { getMockProductData, timeout } from '@/utils/ProductMock';
 
 type Params = {
   fromPage?: number;
@@ -14,5 +14,6 @@ export async function getProducts({
     length: (toPage - fromPage) * 10,
   }).map(() => getMockProductData({ purchaseBy: null }));
 
+  await timeout();
   return Promise.resolve({ data });
 }

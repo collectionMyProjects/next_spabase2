@@ -16,7 +16,7 @@ const SpinnerVariants = cva(
     variants: {
       size: {
         xs: 'size-3',
-        sm: 'size-3.5',
+        sm: 'size-5',
         md: 'size-7',
       },
     },
