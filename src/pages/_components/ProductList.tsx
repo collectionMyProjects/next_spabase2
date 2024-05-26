@@ -6,8 +6,12 @@ import { Spinner } from '@/components/common';
 import Product from '@/components/common/Product';
 import { Product as TProduct } from '@/types';
 
-export default function ProductList() {
-  const [products, setProducts] = useState<TProduct[]>([]);
+export default function ProductList({
+  initialProducts,
+}: {
+  initialProducts: TProduct[];
+}) {
+  const [products, setProducts] = useState<TProduct[]>(initialProducts);
 
   const { ref, inView } = useInView({ threshold: 1 });
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +31,7 @@ export default function ProductList() {
 
       if (data.length === 0) {
         setIsLastPage(true);
+        return;
       }
     } finally {
       setIsLoading(false);
@@ -40,8 +45,6 @@ export default function ProductList() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (page > 50) return;
-
     if (inView) {
       // inView가 true가 되면 새로운 페이지를 불러온다
       (async () => {
@@ -71,7 +74,9 @@ export default function ProductList() {
           <Spinner size="sm" />
         </div>
       )}
-      {products.length > 0 && <div ref={ref} className="h-[10px] w-full" />}
+      {!isLastPage && !!products.length && products.length < 10 && (
+        <div ref={ref} />
+      )}
     </div>
   );
 }
