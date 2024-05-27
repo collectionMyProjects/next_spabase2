@@ -34,7 +34,7 @@ export default function Search() {
         {search ? (
           <AutoComplete query={search} onClose={() => setIsFocused(false)} />
         ) : (
-          <Recent />
+          <Recent onClose={() => setIsFocused(false)} />
         )}
       </div>
     </div>

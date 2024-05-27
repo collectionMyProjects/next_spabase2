@@ -1,4 +1,7 @@
+import { useRef } from 'react';
+
 import { Text } from '@/components/common';
+import { useOutSideClick } from '@/hooks';
 
 type AutoCompleteProps = {
   query: string;
@@ -7,9 +10,12 @@ type AutoCompleteProps = {
 
 const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
   const keyWords: string[] = [];
+  const closeRef = useRef(null);
+
+  useOutSideClick(closeRef, onClose);
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col" ref={closeRef}>
       <div className="flex-1 overflow-hidden p-2">
         <div className="mb-2 flex items-center border-b border-gray-300 pb-1">
           <span className="material-symbols-outlined">storefront</span>
@@ -40,7 +46,7 @@ const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
         )}
       </div>
       <div className="flex h-8 items-center justify-end bg-gray-100 px-2">
-        <Text onClick={onClose} className="cursor-pointer">
+        <Text size="sm" onClick={onClose} className="cursor-pointer">
           닫기
         </Text>
       </div>
