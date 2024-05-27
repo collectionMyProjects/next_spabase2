@@ -1,10 +1,10 @@
 import { InferGetServerSidePropsType } from 'next';
 
+import Banner from './_components/Banner';
 import ProductList from './_components/ProductList';
 
 import { getProducts } from '@/api/Product';
 import Container from '@/components/layout/Container';
-import ThunderLayout from '@/components/layout/ThunderLayout';
 import Wrapper from '@/components/layout/Wrapper';
 
 export const getServerSideProps = async () => {
@@ -19,13 +19,12 @@ const Home = ({
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <ThunderLayout>
-      <Wrapper>
-        <Container>
-          <ProductList initialProducts={products} />
-        </Container>
-      </Wrapper>
-    </ThunderLayout>
+    <Wrapper>
+      <Container>
+        <Banner />
+        <ProductList initialProducts={products} />
+      </Container>
+    </Wrapper>
   );
 };
 export default Home;

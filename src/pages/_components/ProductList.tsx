@@ -74,7 +74,7 @@ export default function ProductList({
           <Spinner size="sm" />
         </div>
       )}
-      {!isLastPage && !!products.length && products.length < 10 && (
+      {!isLastPage && !!products.length && products.length < 100 && (
         <div ref={ref} />
       )}
     </div>
