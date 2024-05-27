@@ -1,8 +1,13 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
 import { Text } from '@/components/common';
 import { useOutSideClick } from '@/hooks';
-import { clearRecentKeywords, getRecentKeyWords } from '@/utils/localstorage';
+import {
+  addRecentKeywords,
+  clearRecentKeywords,
+  getRecentKeyWords,
+} from '@/utils/localstorage';
 
 type RecentProps = {
   onClose: () => void;
@@ -10,6 +15,7 @@ type RecentProps = {
 
 const Recent = ({ onClose }: RecentProps) => {
   const [recents, setRecents] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const recents = getRecentKeyWords();
@@ -35,9 +41,17 @@ const Recent = ({ onClose }: RecentProps) => {
             </Text>
           </div>
         ) : (
-          <div className="h-full overflow-scroll pb-8">
+          <div className="h-full overflow-scroll">
             {recents.map((recent, idx) => (
-              <Text size="sm" key={idx} className="my-1 block truncate">
+              <Text
+                size="sm"
+                key={idx}
+                className="my-1 block cursor-pointer truncate"
+                onClick={() => {
+                  addRecentKeywords(recent);
+                  router.push(`/search?query=${encodeURIComponent(recent)}`);
+                }}
+              >
                 {recent}
               </Text>
             ))}
