@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { forwardRef } from 'react';
 
@@ -18,6 +19,7 @@ type ProductProps = {
 };
 
 dayjs.extend(relativeTime);
+dayjs.locale('ko');
 
 const Product = forwardRef(function Product(
   { title, price, createdAt, imageUrl, isSoldOut }: ProductProps,
