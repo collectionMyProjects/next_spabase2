@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { throttle } from 'lodash';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { getSearchProducts } from '@/api/Product/getSearchProducts';
 import { Text } from '@/components/common';
 import { useOutSideClick } from '@/hooks';
+import { addRecentKeywords } from '@/utils/localstorage';
 
 type AutoCompleteProps = {
   query: string;
@@ -10,22 +13,29 @@ type AutoCompleteProps = {
 };
 
 const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
+  const router = useRouter();
   const [keyWords, setKeywords] = useState<string[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      if (!query) {
-        setKeywords([]);
-        return;
-      }
-      const { data } = await getSearchProducts({
-        query,
-        fromPage: 0,
-        toPage: 2,
-      });
+  const handleSearch = useMemo(
+    () =>
+      throttle(async (query: string) => {
+        console.log('query', query);
+        if (!query) {
+          setKeywords([]);
+          return;
+        }
+        const { data } = await getSearchProducts({
+          query,
+          fromPage: 0,
+          toPage: 2,
+        });
+        setKeywords(data.map(({ title }) => title));
+      }, 500),
+    [],
+  );
 
-      setKeywords(data.map((data) => data.title));
-    })();
+  useEffect(() => {
+    handleSearch(query);
   }, [query]);
 
   const closeRef = useRef(null);
@@ -55,9 +65,17 @@ const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
           </div>
         ) : (
           <div className="h-full overflow-scroll pb-8">
-            {keyWords.map((recent, idx) => (
-              <Text size="sm" key={idx} className="my-1 shrink-0 truncate">
-                {recent}
+            {keyWords.map((keyword, idx) => (
+              <Text
+                size="sm"
+                key={idx}
+                className="my-1 shrink-0 cursor-pointer truncate"
+                onClick={() => {
+                  addRecentKeywords(keyword);
+                  router.push(`/search?query=${encodeURIComponent(keyword)}`);
+                }}
+              >
+                {keyword}
               </Text>
             ))}
           </div>
