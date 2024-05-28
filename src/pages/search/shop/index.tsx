@@ -50,6 +50,10 @@ const SearchShop = ({
     })();
   }, [currentPage, query]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [initialShops]);
+
   return (
     <Wrapper>
       <Container>
