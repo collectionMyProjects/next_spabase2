@@ -21,12 +21,15 @@ export const getServerSideProps: GetServerSideProps<{
   }
 
   const query = decodeURIComponent(originalQuery);
-  const { data: shops } = await getSearchShops({
-    query,
-    fromPage: 0,
-    toPage: 1,
-  });
-  const { data: count } = await getSearchShopsCount(query);
+
+  const [{ data: shops }, { data: count }] = await Promise.all([
+    getSearchShops({
+      query,
+      fromPage: 0,
+      toPage: 1,
+    }),
+    getSearchShopsCount(query),
+  ]);
 
   return { props: { shops, query, count } };
 };

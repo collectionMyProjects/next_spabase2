@@ -19,13 +19,15 @@ export const getServerSideProps: GetServerSideProps<{
   }
 
   const query = decodeURIComponent(originalQuery);
-  const { data: products } = await getSearchProducts({
-    query,
-    fromPage: 0,
-    toPage: 1,
-  });
 
-  const { data: count } = await getSearchPRoductsCount(query);
+  const [{ data: products }, { data: count }] = await Promise.all([
+    getSearchProducts({
+      query,
+      fromPage: 0,
+      toPage: 1,
+    }),
+    getSearchPRoductsCount(query),
+  ]);
 
   return { props: { products, query, count } };
 };
