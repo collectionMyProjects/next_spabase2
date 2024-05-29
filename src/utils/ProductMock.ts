@@ -17,12 +17,7 @@ export function getMockProductData(defaultValue?: Partial<Product>) {
       ),
     isChange: defaultValue?.isChange ?? faker.datatype.boolean(),
     isUsed: defaultValue?.isUsed ?? faker.datatype.boolean(),
-    tags:
-      defaultValue?.tags ?? faker.datatype.boolean()
-        ? Array.from({ length: faker.number.int({ min: 1, max: 5 }) }).map(() =>
-            faker.lorem.word(),
-          )
-        : null,
+    tags: Array.from({ length: 5 }).map(() => faker.lorem.word()),
     createdAt: defaultValue?.createdAt ?? faker.date.past().toString(),
     createdBy: defaultValue?.createdBy ?? faker.string.uuid(),
     purchaseBy:
