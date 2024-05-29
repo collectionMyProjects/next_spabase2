@@ -45,7 +45,12 @@ const AutoComplete = ({ query, onClose }: AutoCompleteProps) => {
   return (
     <div className="flex h-full flex-col" ref={closeRef}>
       <div className="flex-1 overflow-hidden p-2">
-        <div className="mb-2 flex items-center border-b border-gray-300 pb-1">
+        <div
+          className="mb-2 flex cursor-pointer items-center border-b border-gray-300 pb-1"
+          onClick={() => {
+            router.push(`/search/shop?query=${encodeURIComponent(query)}`);
+          }}
+        >
           <span className="material-symbols-outlined shrink-0">storefront</span>
           <Text size="sm" className="ml-1 shrink-0">
             상점 검색 {'>'}

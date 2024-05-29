@@ -61,7 +61,7 @@ const Shop = forwardRef(function Shop(
             type === 'column' && 'justify-center',
           )}
         >
-          <div>상품 {productCount}</div> |<div>팔로워 {followerCount}</div>
+          <div>상품 {productCount}</div> | <div>팔로워 {followerCount}</div>
         </Text>
       </div>
     </div>

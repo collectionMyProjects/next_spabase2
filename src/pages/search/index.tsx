@@ -19,13 +19,15 @@ export const getServerSideProps: GetServerSideProps<{
   }
 
   const query = decodeURIComponent(originalQuery);
-  const { data: products } = await getSearchProducts({
-    query,
-    fromPage: 0,
-    toPage: 1,
-  });
 
-  const { data: count } = await getSearchPRoductsCount(query);
+  const [{ data: products }, { data: count }] = await Promise.all([
+    getSearchProducts({
+      query,
+      fromPage: 0,
+      toPage: 1,
+    }),
+    getSearchPRoductsCount(query),
+  ]);
 
   return { props: { products, query, count } };
 };
@@ -38,6 +40,10 @@ const Search = ({
   const [products, setProducts] = useState<TProduct[]>(initialProducts);
   // 사용자에게 보이는 페이지는 1부터 시작
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [initialProducts]);
 
   useEffect(() => {
     (async () => {
