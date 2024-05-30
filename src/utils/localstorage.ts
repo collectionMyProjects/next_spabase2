@@ -24,7 +24,7 @@ export const addRecentKeywords = (keyWord: string) => {
   const existItems = items.find((item: string) => item === keyWord);
 
   if (existItems) {
-    const prevItems = items.filter((item: string) => item !== prevItems);
+    const prevItems = items.filter((item: string) => item !== keyWord);
     setArray(RECENT_KEYWORDS, [keyWord, ...prevItems]);
   } else {
     setArray(RECENT_KEYWORDS, [keyWord, ...items]);
