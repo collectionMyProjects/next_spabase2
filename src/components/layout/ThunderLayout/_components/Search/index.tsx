@@ -45,7 +45,10 @@ export default function Search() {
         )}
       >
         {search ? (
-          <AutoComplete query={search} onClose={() => setIsFocused(false)} />
+          <AutoComplete
+            query={search}
+            handleClose={() => setIsFocused(false)}
+          />
         ) : (
           <Recent onClose={() => setIsFocused(false)} />
         )}

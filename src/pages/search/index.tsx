@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { getSearchPRoductsCount } from '@/api/Product';
@@ -71,14 +72,14 @@ const Search = ({
             <Text>검색 결과가 없습니다.</Text>
           ) : (
             products.map(({ id, title, price, createdAt, imageUrls }) => (
-              <div key={id}>
+              <Link key={id} href={`/products/${id}`} prefetch={false}>
                 <Product
                   title={title}
                   price={price}
                   createdAt={createdAt}
                   imageUrl={imageUrls[0]}
                 />
-              </div>
+              </Link>
             ))
           )}
         </div>
